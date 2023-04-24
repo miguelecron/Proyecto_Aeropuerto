@@ -38,12 +38,21 @@ public abstract class Vuelo implements Comparable<Vuelo>{
         this.plazas = plazas;
     }
 
-    // --------------------------- METODOS OVERRIDE -----------------------------------
+    // --------------------------- METODOS OVERRIDE ------------------
 
     @Override
     public int compareTo(Vuelo o) {
-
+        if (this.destino.equals(o.destino)) {
+            if (this.plazas == o.plazas) {
+                return this.modeloAvion.compareTo(o.modeloAvion);
+            } else {
+                return this.plazas - o.plazas;
+            }
+        } else {
+            return this.destino.compareTo(o.destino);
+        }
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -67,10 +76,10 @@ public abstract class Vuelo implements Comparable<Vuelo>{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder("\n");
         sb.append("Destino: ").append(destino);
-        sb.append("Avion: ").append(modeloAvion);
-        sb.append("Plazas: ").append(plazas);
+        sb.append("\n Avion: ").append(modeloAvion);
+        sb.append("\n Plazas: ").append(plazas);
         return sb.toString();
     }
 }
