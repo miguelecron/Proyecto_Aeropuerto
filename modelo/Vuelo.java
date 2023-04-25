@@ -5,12 +5,16 @@ public abstract class Vuelo implements Comparable<Vuelo>{
     private String destino;
     private String modeloAvion;
     private int plazas;
+    private int precio;
 
-    public Vuelo(String destino, String modeloAvion, int plazas) {
+    public Vuelo(String destino, String modeloAvion, int plazas, int precio) {
         this.destino = destino;
         this.modeloAvion = modeloAvion;
         this.plazas = plazas;
+        this.precio = precio;
     }
+
+    public abstract double calcularPrecioBillete();
 
     // ------------------------- GETTERS & SETTERS -----------------------------------
 
@@ -36,6 +40,14 @@ public abstract class Vuelo implements Comparable<Vuelo>{
 
     public void setPlazas(int plazas) {
         this.plazas = plazas;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 
     // --------------------------- METODOS OVERRIDE ------------------
@@ -80,6 +92,7 @@ public abstract class Vuelo implements Comparable<Vuelo>{
         sb.append("Destino: ").append(destino);
         sb.append("\nAvion: ").append(modeloAvion);
         sb.append("\nPlazas: ").append(plazas);
+        sb.append("n Precio billete: ").append(calcularPrecioBillete()).append(" €");
         return sb.toString();
     }
 }

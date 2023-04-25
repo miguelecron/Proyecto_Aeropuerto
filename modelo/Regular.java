@@ -4,8 +4,8 @@ public class Regular extends Vuelo {
 
     private int plazasLibres;
 
-    public Regular(String destino, String modeloAvion, int plazas, int plazasLibres) {
-        super(destino, modeloAvion, plazas);
+    public Regular(String destino, String modeloAvion, int plazas, int plazasLibres, int precio) {
+        super(destino, modeloAvion, plazas, precio);
         this.plazasLibres = plazasLibres;
     }
 
@@ -22,6 +22,10 @@ public class Regular extends Vuelo {
     // --------------------------- METODOS OVERRIDE -----------------------------------
 
 
+    @Override
+    public double calcularPrecioBillete() {
+        return getPrecio() * 1.1 + (5 * plazasLibres);
+    }
 
     @Override
     public String toString() {

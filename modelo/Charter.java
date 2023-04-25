@@ -4,8 +4,8 @@ public class Charter extends Vuelo {
 
     private String nifEmpresa;
 
-    public Charter(String destino, String modeloAvion, int plazas, String nifEmpresa) {
-        super(destino, modeloAvion, plazas);
+    public Charter(String destino, String modeloAvion, int plazas, String nifEmpresa, int precio) {
+        super(destino, modeloAvion, plazas, precio);
         this.nifEmpresa = nifEmpresa;
     }
 
@@ -22,6 +22,16 @@ public class Charter extends Vuelo {
 
 
     // ------------------------- METODOS OVERRIDE -----------------------------------
+
+
+    @Override
+    public double calcularPrecioBillete() {
+        double precioTotal = getPrecio() * 1.25;
+        if (getPlazas() < 200){
+            precioTotal += 50;
+        }
+        return precioTotal;
+    }
 
     @Override
     public String toString() {

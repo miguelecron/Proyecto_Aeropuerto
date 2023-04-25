@@ -20,9 +20,6 @@ public class AppAeropuerto {
 				aeropuerto.imprimirPasajerosPorAerolinea("AA") + " pasajeros");
 		System.out.println("\nImprimir vuelos con más pasajeros que la media de plazas");
 		aeropuerto.imprimirVuelosMasPasajerosQueMedia();
-
-
-
 		System.out.println("\nSe han borrado " + aeropuerto.borrarVuelosEmpresa("98735424") + " vuelos");
 	}
 
