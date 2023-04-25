@@ -52,7 +52,7 @@ public class Aeropuerto {
             return r2.getPlazasLibres() - r1.getPlazasLibres();
         });
 
-        // Cogemos solo los vuelos regulares y los añadimos a vuelosRegulares
+        // Cogemos solo los vuelos regulares y los aÃ±adimos a vuelosRegulares
 
         for (Vuelo vuelo : this.vuelos.get(aerolinea)) {
             if (vuelo instanceof Regular) {
@@ -153,11 +153,11 @@ public class Aeropuerto {
     }
 
     /**
-     * Para una aerolínea, calcula el número total de viajeros entre todos sus vuelos.
-     * El cálculo del número de viajeros se hará de la siguiente manera:
-     * ? Vuelos Charter: será igual al número de plazas del vuelo.
-     * ? Vuelos Regulares: será la resta del número de plazas del vuelo menos el de plazas libres.
-     * @param aerolinea aerolínea de la que queremos calcular el número de viajeros
+     * Para una aerolÃ­nea, calcula el nÃºmero total de viajeros entre todos sus vuelos.
+     * El cÃ¡lculo del nÃºmero de viajeros se harÃ¡ de la siguiente manera:
+     * ? Vuelos Charter: serÃ¡ igual al nÃºmero de plazas del vuelo.
+     * ? Vuelos Regulares: serÃ¡ la resta del nÃºmero de plazas del vuelo menos el de plazas libres.
+     * @param aerolinea aerolÃ­nea de la que queremos calcular el nÃºmero de viajeros
      */
     public int imprimirPasajerosPorAerolinea(String aerolinea){
         int totalViajeros = 0;
@@ -174,14 +174,14 @@ public class Aeropuerto {
 
     /**
      *
-     Imprime, por cada línea, los vuelos cuyo número de plazas es igual o superior
-     al número de plazas de todos los vuelos de esa aerolínea.
+     Imprime, por cada lÃ­nea, los vuelos cuyo nÃºmero de plazas es igual o superior
+     al nÃºmero de plazas de todos los vuelos de esa aerolÃ­nea.
      */
     public void imprimirVuelosMasPasajerosQueMedia(){
         for (String aerolinea: this.vuelos.keySet()) {
             double mediaPlazas = mediaPlazasAerolinea(aerolinea);
             System.out.println("\nLa media de plazas de los vuelos de " + aerolinea + " es " + mediaPlazas);
-            System.out.println("Los vuelos de " + aerolinea + " con más plazas que la media son: ");
+            System.out.println("Los vuelos de " + aerolinea + " con mÃ¡s plazas que la media son: ");
             for (Vuelo vuelo: this.vuelos.get(aerolinea)) {
                 if (vuelo.getPlazas() >= mediaPlazas){
                     System.out.println(vuelo);
@@ -191,7 +191,7 @@ public class Aeropuerto {
     }
 
     /**
-     * Calcula la media de plazas de una aerolínea;
+     * Calcula la media de plazas de una aerolÃ­nea;
      * @param aerolinea clave de la cual queremos sacar la media
      * @return retorna la media de plazas de la aerolinea
      */
