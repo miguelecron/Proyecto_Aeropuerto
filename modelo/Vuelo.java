@@ -43,10 +43,10 @@ public abstract class Vuelo implements Comparable<Vuelo>{
     @Override
     public int compareTo(Vuelo o) {
         if (this.destino.equals(o.destino)) {
-            if (this.plazas == o.plazas) {
-                return this.modeloAvion.compareTo(o.modeloAvion);
-            } else {
+            if (this.modeloAvion.compareTo(o.modeloAvion) == 0) {
                 return this.plazas - o.plazas;
+            } else {
+                return this.modeloAvion.compareTo(o.modeloAvion);
             }
         } else {
             return this.destino.compareTo(o.destino);
@@ -78,8 +78,8 @@ public abstract class Vuelo implements Comparable<Vuelo>{
     public String toString() {
         final StringBuilder sb = new StringBuilder("\n");
         sb.append("Destino: ").append(destino);
-        sb.append("\n Avion: ").append(modeloAvion);
-        sb.append("\n Plazas: ").append(plazas);
+        sb.append("\nAvion: ").append(modeloAvion);
+        sb.append("\nPlazas: ").append(plazas);
         return sb.toString();
     }
 }

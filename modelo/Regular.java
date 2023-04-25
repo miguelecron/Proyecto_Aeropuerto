@@ -1,7 +1,5 @@
 package Tarea12_Aeropuerto.modelo;
 
-import java.util.Comparator;
-
 public class Regular extends Vuelo {
 
     private int plazasLibres;
@@ -28,10 +26,10 @@ public class Regular extends Vuelo {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("\n Vuelo Regular");
+        sb.append("\nVuelo Regular");
         sb.append("\n--------------");
         sb.append(super.toString());
-        sb.append("\n Plazas Libres: ").append(plazasLibres);
+        sb.append("\nPlazas Libres: ").append(plazasLibres);
 
         return sb.toString();
     }

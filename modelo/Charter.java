@@ -26,10 +26,10 @@ public class Charter extends Vuelo {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("\n Vuelo Charter");
+        sb.append("\nVuelo Charter");
         sb.append("\n-------------");
         sb.append(super.toString());
-        sb.append("\n NIF Empresa: ").append(nifEmpresa);
+        sb.append("\nNIF Empresa: ").append(nifEmpresa);
 
         return sb.toString();
     }

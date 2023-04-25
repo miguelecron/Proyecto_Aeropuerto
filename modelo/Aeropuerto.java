@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Aeropuerto {
 
-    private Map<String, TreeSet<Vuelo>> vuelos;
+    private Map<String, Set<Vuelo>> vuelos;
 
     public Aeropuerto() {
         vuelos = new TreeMap<>();
@@ -20,11 +20,10 @@ public class Aeropuerto {
         if (!this.vuelos.containsKey(aerolinea)) {
             Set<Vuelo> tmpVuelos = new TreeSet<>();
             tmpVuelos.add(vuelo);
-            this.vuelos.put(aerolinea, (TreeSet<Vuelo>) tmpVuelos);
+            this.vuelos.put(aerolinea, tmpVuelos);
         } else {
             this.vuelos.get(aerolinea).add(vuelo);
         }
-
     }
 
     /**
@@ -57,11 +56,15 @@ public class Aeropuerto {
             }
         });
 
+        // Cogemos solo los vuelos regulares y los añadimos a vuelosRegulares
+
         for (Vuelo vuelo : this.vuelos.get(aerolinea)) {
             if (vuelo instanceof Regular) {
                 vuelosRegulares.add((Regular) vuelo);
             }
         }
+
+        // Imprimimos los vuelos regulares por consola
 
         for (Regular regular : vuelosRegulares) {
             System.out.println(regular);
@@ -75,7 +78,17 @@ public class Aeropuerto {
      * @return aerolina Aerolina del avion charter con m?s capacidad
      */
     public List<Vuelo> plazasLibres() {
-        return null;
+        List<Vuelo> vuelosConPlazasLibres = new ArrayList<>();
+
+        for (String aerolinea: this.vuelos.keySet()) {
+            for (Vuelo vuelo: this.vuelos.get(aerolinea)) {
+                if ((vuelo instanceof Regular) && ((Regular) vuelo).getPlazasLibres() > 0){
+                    vuelosConPlazasLibres.add((Regular) vuelo);
+                }
+            }
+        }
+
+        return vuelosConPlazasLibres;
     }
 
     /**
@@ -86,6 +99,21 @@ public class Aeropuerto {
      */
     public void estadisticaDestino(String destino) {
 
+        for (String aerolinea: this.vuelos.keySet()) {
+            int vuelosTotales = 0;
+            int vuelosDestino = 0;
+
+            for (Vuelo vuelo: this.vuelos.get(aerolinea)) {
+                if (vuelo.getDestino().equals(destino)){
+                    vuelosDestino++;
+                    vuelosTotales++;
+                } else {
+                    vuelosTotales++;
+                }
+            }
+            System.out.println("\n" + vuelosDestino + " de cada " + vuelosTotales + " de la aerolinea "
+             + aerolinea + " vuelan a " + destino);
+        }
     }
 
     /**
@@ -96,7 +124,25 @@ public class Aeropuerto {
      * @return numero de vuelos borrados
      */
     public int borrarVuelosEmpresa(String nifEmpresa) {
-        return 0;
+        Set<Map.Entry<String, Set<Vuelo>>> tmpVuelos = this.vuelos.entrySet();
+        int vuelosBorrados = 0;
+
+        for (Map.Entry<String, Set<Vuelo>> vuelos: tmpVuelos) {
+
+            Iterator<Vuelo> it = vuelos.getValue().iterator();
+
+            while (it.hasNext()){
+
+                Vuelo vuelo = it.next();
+
+                if ((vuelo instanceof Charter) && (((Charter) vuelo).getNifEmpresa().equals(nifEmpresa))){
+                    it.remove();
+                    vuelosBorrados++;
+                }
+            }
+        }
+
+        return vuelosBorrados;
     }
 
     /**
@@ -105,7 +151,9 @@ public class Aeropuerto {
      * @param listaVuelos
      */
     public void imprimirListaVuelos(List<Vuelo> listaVuelos) {
-
+        for (Vuelo vuelo: listaVuelos) {
+            System.out.println(vuelo);
+        }
     }
 
     /**
@@ -113,7 +161,18 @@ public class Aeropuerto {
      */
     @Override
     public String toString() {
-        return null;
+        final StringBuilder sb = new StringBuilder();
+        for (String aerolinea: this.vuelos.keySet()) {
+            sb.append("\n");
+            sb.append(aerolinea);
+            sb.append("\n========");
+            for (Vuelo vuelo: this.vuelos.get(aerolinea)) {
+                sb.append("\n");
+                sb.append(vuelo.toString());
+            }
+        }
+
+        return sb.toString();
     }
 
     /**
