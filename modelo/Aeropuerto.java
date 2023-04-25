@@ -157,6 +157,60 @@ public class Aeropuerto {
     }
 
     /**
+     * Para una aerolínea, calcula el número total de viajeros entre todos sus vuelos.
+     * El cálculo del número de viajeros se hará de la siguiente manera:
+     * ? Vuelos Charter: será igual al número de plazas del vuelo.
+     * ? Vuelos Regulares: será la resta del número de plazas del vuelo menos el de plazas libres.
+     * @param aerolinea aerolínea de la que queremos calcular el número de viajeros
+     */
+    public int imprimirPasajerosPorAerolinea(String aerolinea){
+        int totalViajeros = 0;
+
+        for (Vuelo vuelo: this.vuelos.get(aerolinea)) {
+            if (vuelo instanceof Charter){
+                totalViajeros += vuelo.getPlazas();
+            } else {
+                totalViajeros += ((Regular) vuelo).getPlazas() - ((Regular) vuelo).getPlazasLibres();
+            }
+        }
+        return totalViajeros;
+    }
+
+    /**
+     *
+     Imprime, por cada línea, los vuelos cuyo número de plazas es igual o superior
+     al número de plazas de todos los vuelos de esa aerolínea.
+     */
+    public void imprimirVuelosMasPasajerosQueMedia(){
+        for (String aerolinea: this.vuelos.keySet()) {
+            double mediaPlazas = mediaPlazasAerolinea(aerolinea);
+            System.out.println("\nLa media de plazas de los vuelos de " + aerolinea + " es " + mediaPlazas);
+            System.out.println("Los vuelos de " + aerolinea + " con más plazas que la media son: ");
+            for (Vuelo vuelo: this.vuelos.get(aerolinea)) {
+                if (vuelo.getPlazas() >= mediaPlazas){
+                    System.out.println(vuelo.toString());
+                }
+            }
+        }
+    }
+
+    /**
+     * Calcula la media de plazas de una aerolínea;
+     * @param aerolinea
+     * @return
+     */
+    private double mediaPlazasAerolinea(String aerolinea){
+        double plazasTotales = 0;
+        double numeroVuelos = 0;
+
+        for (Vuelo vuelo: this.vuelos.get(aerolinea)) {
+            numeroVuelos++;
+            plazasTotales += vuelo.getPlazas();
+        }
+        return plazasTotales / numeroVuelos;
+    }
+
+    /**
      * Represetaci?n textual del mapa tal y como se muestra en el enunciado
      */
     @Override
