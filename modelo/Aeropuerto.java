@@ -47,12 +47,9 @@ public class Aeropuerto {
      * @param aerolinea Aerolinea de la que se imprimiran los vuelos regulares
      */
     public void regularPorPlazas(String aerolinea) {
-        Set<Regular> vuelosRegulares = new TreeSet<>(new Comparator<Regular>() {
-            @Override
-            public int compare(Regular r1, Regular r2) {
-                // Ordenar por plazas libres de mayor a menor
-                return r2.getPlazasLibres() - r1.getPlazasLibres();
-            }
+        Set<Regular> vuelosRegulares = new TreeSet<>((r1, r2) -> {
+            // Ordenar por plazas libres de mayor a menor
+            return r2.getPlazasLibres() - r1.getPlazasLibres();
         });
 
         // Cogemos solo los vuelos regulares y los añadimos a vuelosRegulares
@@ -82,7 +79,7 @@ public class Aeropuerto {
         for (String aerolinea: this.vuelos.keySet()) {
             for (Vuelo vuelo: this.vuelos.get(aerolinea)) {
                 if ((vuelo instanceof Regular) && ((Regular) vuelo).getPlazasLibres() > 0){
-                    vuelosConPlazasLibres.add((Regular) vuelo);
+                    vuelosConPlazasLibres.add(vuelo);
                 }
             }
         }
@@ -169,7 +166,7 @@ public class Aeropuerto {
             if (vuelo instanceof Charter){
                 totalViajeros += vuelo.getPlazas();
             } else {
-                totalViajeros += ((Regular) vuelo).getPlazas() - ((Regular) vuelo).getPlazasLibres();
+                totalViajeros += vuelo.getPlazas() - ((Regular) vuelo).getPlazasLibres();
             }
         }
         return totalViajeros;
@@ -187,7 +184,7 @@ public class Aeropuerto {
             System.out.println("Los vuelos de " + aerolinea + " con más plazas que la media son: ");
             for (Vuelo vuelo: this.vuelos.get(aerolinea)) {
                 if (vuelo.getPlazas() >= mediaPlazas){
-                    System.out.println(vuelo.toString());
+                    System.out.println(vuelo);
                 }
             }
         }
@@ -195,8 +192,8 @@ public class Aeropuerto {
 
     /**
      * Calcula la media de plazas de una aerolínea;
-     * @param aerolinea
-     * @return
+     * @param aerolinea clave de la cual queremos sacar la media
+     * @return retorna la media de plazas de la aerolinea
      */
     private double mediaPlazasAerolinea(String aerolinea){
         double plazasTotales = 0;
