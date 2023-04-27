@@ -30,14 +30,7 @@ public class Aeropuerto {
      * como vuelos estaran ordenados alfabeticamente (Ver resultados de ejecucion)
      */
     public void ordenAerolineasAlfabetico() {
-        for (String aerolinea : vuelos.keySet()) {
-            System.out.println();
-            System.out.println(aerolinea);
-            System.out.println("========");
-            for (Vuelo vuelo : this.vuelos.get(aerolinea)) {
-                System.out.println(vuelo);
-            }
-        }
+        System.out.println(toString());
     }
 
     /**

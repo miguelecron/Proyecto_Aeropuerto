@@ -81,8 +81,8 @@ public abstract class Vuelo implements Comparable<Vuelo>{
     @Override
     public int hashCode() {
         int result = destino.hashCode();
-        result = 31 * result + modeloAvion.hashCode();
-        result = 31 * result + plazas;
+        result = 33 * result + modeloAvion.hashCode();
+        result = 33 * result + plazas;
         return result;
     }
 
