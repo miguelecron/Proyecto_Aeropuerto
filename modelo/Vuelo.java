@@ -92,7 +92,7 @@ public abstract class Vuelo implements Comparable<Vuelo>{
         sb.append("Destino: ").append(destino);
         sb.append("\nAvion: ").append(modeloAvion);
         sb.append("\nPlazas: ").append(plazas);
-        sb.append("n Precio billete: ").append(calcularPrecioBillete()).append(" €");
+        sb.append("n Precio billete: ").append(String.format("%.##", calcularPrecioBillete())).append(" €");
         return sb.toString();
     }
 }
